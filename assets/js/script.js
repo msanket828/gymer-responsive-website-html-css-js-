@@ -119,10 +119,11 @@ function tabFunctionality(e) {
 
 
 //for counters
-var nums = document.querySelectorAll(".counts");
+var nums = document.querySelectorAll(".counts"),
+		section=document.querySelector('.counter-div')
 
 nums.forEach(function(num) {
-	let speed=70;
+	let speed=120;
 	let target=num.getAttribute("data-val");
 	//fatArrow ES6 function	
 	const updateCounter=()=>{
@@ -131,18 +132,20 @@ nums.forEach(function(num) {
 		if(count < target) {
 			let currentVal=count+inc;
 			num.innerText=Math.ceil(currentVal);
-			setTimeout(updateCounter, 50);
+			setTimeout(updateCounter, 200);
 		} else {
 				num.innerText=target;
 			}	
 	};
+
 	window.addEventListener("scroll",function() {
-		console.log(scrollY);
-		if(scrollY==300) {
-			updateCounter();		
+		var pageAt=(window.innerHeight+window.scrollY);
+		var pos=(section.offsetTop + section.offsetHeight /2);
+		console.log(pos);
+		if(pageAt>pos) {
+			updateCounter();
 		}
-	})		
-	
+	})	
 })
 
 
